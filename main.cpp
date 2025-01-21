@@ -14,8 +14,22 @@ struct Prato
     string nome;
 };
 
-void bubbleSort(vector<Prato> &pratos)
-{
+void bubbleSort(vector<Prato> &pratos, int n)
+{    
+    for (int i = 0; i < n - 1; ++i)
+    {
+        for (int j = 0; j < n - i - 1; ++j)
+        {
+            //maior prioridade ou, caso empate, menor tempo
+            if (pratos[j].prioridade < pratos[j + 1].prioridade || 
+                (pratos[j].prioridade == pratos[j + 1].prioridade && pratos[j].tempo > pratos[j + 1].tempo))
+            {
+                Prato aux = pratos[j];
+                pratos[j] = pratos[j + 1];
+                pratos[j + 1] = aux;
+            }
+        }
+    }
 }
 
 void quickSort(vector<Prato> &pratos, int low, int high)
@@ -42,17 +56,19 @@ int gerarNumeroAleatorio(int min, int max)
 
 int main()
 {
-    int n = 10; // aumentar depois 0 < k < 3 ⋅ 105
+    int n = 10; // aumentar depois 300000
     vector<Prato> pratos(n);
 
     for (int i = 0; i < n; ++i)
     {
         pratos[i].prioridade = gerarNumeroAleatorio(1, 300000); // Prioridade - 0 < k < 300k
         pratos[i].tempo = gerarNumeroAleatorio(1, 1000);        // Tempo - 0 < t < 10k
-        pratos[i].nome = gerarNomePrato(i);                     // Nome
+        pratos[i].nome = gerarNomePrato(i);                     // Nome no máximo 50 caracteres, sem espaço
     }
 
-    cout << "Pratos gerados:" << endl;
+    bubbleSort(pratos, pratos.size());
+
+    cout << "Pratos ordenados com bubbleSort:" << endl;
     for (int i = 0; i < n; ++i)
     {
         cout << "Prato " << i + 1 << ": "
@@ -60,14 +76,7 @@ int main()
              << "Prioridade: " << pratos[i].prioridade << ", "
              << "Tempo: " << pratos[i].tempo << " minutos" << endl;
     }
-
-    /*Ordene em ordem decrescente de acordo com a prioridade, se a prioridade for a mesma,
-o de menor tempo deverá ser priorizado. Nenhum prato tem a mesma prioridade e tempo de
-preparo.
-
-A prioridade é um inteiro 0 < p < 3 ⋅ 105, o tempo de preparo (em minutos) é um inteiro 0 <
-t < 103, o nome é uma string de no máximo 50 caracteres, sem espaço.*/
-
+   
     return 0;
 }
 
