@@ -34,8 +34,8 @@ void bubbleSort(vector<Prato> &pratos, int n)
 
 int quickSort_particao(vector<Prato> &pratos, int low, int high)
 {
-    Prato pivot = pratos[high];
-    int i = low - 1;
+    Prato pivot = pratos[high]; 
+    int i = low - 1; 
 
     for (int j = low; j < high; ++j)
     {
@@ -43,11 +43,17 @@ int quickSort_particao(vector<Prato> &pratos, int low, int high)
             (pratos[j].prioridade == pivot.prioridade && pratos[j].tempo < pivot.tempo))
         {
             i++;
-            swap(pratos[i], pratos[j]);
+            Prato aux = pratos[i];
+            pratos[i] = pratos[j];
+            pratos[j] = aux;
         }
     }
-    swap(pratos[i + 1], pratos[high]);
-    return i + 1;
+
+    Prato aux = pratos[i + 1];
+    pratos[i + 1] = pratos[high];
+    pratos[high] = aux;
+
+    return i + 1; 
 }
 
 void quickSort_ordena(vector<Prato> &pratos, int low, int high)
