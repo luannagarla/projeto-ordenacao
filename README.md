@@ -14,4 +14,8 @@ Joãozinho está planejando abrir um restaurante especializado em comida britân
 - [X]   Compare os métodos de ordenação e faça uma breve explicação sobre a escolha de pivôs no Quicksort.
 
 ---
-**:dart: Comaprações do código** 
+**:dart: Comparações dos códigos** 
+
+
+---
+**:dart: Escolha do pivô** 

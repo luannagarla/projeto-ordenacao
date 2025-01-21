@@ -2,8 +2,8 @@
 #include <vector>
 #include <random>
 #include <ctime>
-#include <string> 
-#include <sstream> 
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -15,13 +15,13 @@ struct Prato
 };
 
 void bubbleSort(vector<Prato> &pratos, int n)
-{    
+{
     for (int i = 0; i < n - 1; ++i)
     {
         for (int j = 0; j < n - i - 1; ++j)
         {
-            //maior prioridade ou, caso empate, menor tempo
-            if (pratos[j].prioridade < pratos[j + 1].prioridade || 
+            // maior prioridade ou, caso empate, menor tempo
+            if (pratos[j].prioridade < pratos[j + 1].prioridade ||
                 (pratos[j].prioridade == pratos[j + 1].prioridade && pratos[j].tempo > pratos[j + 1].tempo))
             {
                 Prato aux = pratos[j];
@@ -32,8 +32,33 @@ void bubbleSort(vector<Prato> &pratos, int n)
     }
 }
 
-void quickSort(vector<Prato> &pratos, int low, int high)
+int quickSort_particao(vector<Prato> &pratos, int low, int high)
 {
+    Prato pivot = pratos[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; ++j)
+    {
+        if (pratos[j].prioridade > pivot.prioridade ||
+            (pratos[j].prioridade == pivot.prioridade && pratos[j].tempo < pivot.tempo))
+        {
+            i++;
+            swap(pratos[i], pratos[j]);
+        }
+    }
+    swap(pratos[i + 1], pratos[high]);
+    return i + 1;
+}
+
+void quickSort_ordena(vector<Prato> &pratos, int low, int high)
+{
+    if (low < high)
+    {
+        int pi = quickSort_particao(pratos, low, high);
+
+        quickSort_ordena(pratos, low, pi - 1);
+        quickSort_ordena(pratos, pi + 1, high);
+    }
 }
 
 string gerarNomePrato(int indice)
@@ -54,6 +79,16 @@ int gerarNumeroAleatorio(int min, int max)
     return dist(rng);
 }
 
+void printData(vector<Prato> pratos, int n){
+    for (int i = 0; i < n; ++i)
+    {
+        cout << "Prato " << i + 1 << ": "
+             << "Nome: " << pratos[i].nome << ", "
+             << "Prioridade: " << pratos[i].prioridade << ", "
+             << "Tempo: " << pratos[i].tempo << " minutos" << endl;
+    }
+}
+
 int main()
 {
     int n = 10; // aumentar depois 300000
@@ -66,18 +101,13 @@ int main()
         pratos[i].nome = gerarNomePrato(i);                     // Nome no máximo 50 caracteres, sem espaço
     }
 
-    bubbleSort(pratos, pratos.size());
+    bubbleSort(pratos, n);
 
-    cout << "Pratos ordenados com bubbleSort:" << endl;
-    for (int i = 0; i < n; ++i)
-    {
-        cout << "Prato " << i + 1 << ": "
-             << "Nome: " << pratos[i].nome << ", "
-             << "Prioridade: " << pratos[i].prioridade << ", "
-             << "Tempo: " << pratos[i].tempo << " minutos" << endl;
-    }
-   
+    cout << "Pratos ordenados com BubbleSort:" << endl;
+    printData(pratos, n);
+
+    quickSort_ordena(pratos, 0, n - 1);
+    printData(pratos, n);
+
     return 0;
 }
-
-// Compare os métodos de ordenação e faça uma breve explicação sobre a escolha de pivôs no Quicksort.
