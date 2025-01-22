@@ -1,8 +1,11 @@
+#define _TIMESPEC_DEFINED
 #include <iostream>
 #include <vector>
 #include <random>
 #include <ctime>
 #include <string>
+#include <sstream>
+#include <time.h>
 
 using namespace std;
 
@@ -94,7 +97,7 @@ void printData(const vector<Prato> &pratos, int n)
 
 int main()
 {
-    int n = 10; // mudar pra 300000
+    int n = 100000; // mudar pra 300000
 
     vector<Prato> pratos(n);
 
@@ -113,21 +116,24 @@ int main()
     clock_t start = clock();
     bubbleSort(pratosParaBubble, n);
     clock_t end = clock();
-    double bubbleTime = double(end - start) / CLOCKS_PER_SEC;
-    cout << "Tempo de execução do Bubble Sort: " << bubbleTime << " segundos" << endl;
 
-    cout << "\nPratos ordenados com Bubble Sort:" << endl;
-    printData(pratosParaBubble, n);
+    // cout << "\nPratos ordenados com Bubble Sort:" << endl;
+    // printData(pratosParaBubble, n);
 
     // Quick Sort
     start = clock();
     quickSort_ordena(pratosParaQuick, 0, n - 1);
     end = clock();
+
+    // cout << "\nPratos ordenados com Quick Sort:" << endl;
+    // printData(pratosParaQuick, n);
+
+
+    // Tempos
+    double bubbleTime = double(end - start) / CLOCKS_PER_SEC;
+    cout << "Tempo de execução do Bubble Sort: " << bubbleTime << " segundos" << endl;
     double quickTime = double(end - start) / CLOCKS_PER_SEC;
     cout << "Tempo de execução do Quick Sort: " << quickTime << " segundos" << endl;
-
-    cout << "\nPratos ordenados com Quick Sort:" << endl;
-    printData(pratosParaQuick, n);
 
     return 0;
 }
