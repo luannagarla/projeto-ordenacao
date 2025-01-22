@@ -108,11 +108,11 @@ int main()
     }
 
     bubbleSort(pratos, n);
-
-    cout << "Pratos ordenados com BubbleSort:" << endl;
+    cout << endl << "Pratos ordenados com BubbleSort:" << endl;
     printData(pratos, n);
 
     quickSort_ordena(pratos, 0, n - 1);
+    cout << endl < "Pratos ordenados com QuickSort:" << endl;
     printData(pratos, n);
 
     return 0;
