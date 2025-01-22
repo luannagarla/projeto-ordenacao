@@ -105,7 +105,7 @@ int main()
     for (int i = 0; i < n; ++i)
     {
         pratos[i].prioridade = gerarNumeroAleatorio(1, 300000); // Prioridade - 0 < k < 300k
-        pratos[i].tempo = gerarNumeroAleatorio(1, 1000);        // Tempo - 0 < t < 10k
+        pratos[i].tempo = gerarNumeroAleatorio(1, 1000);        // Tempo - 0 < t < 1k
         pratos[i].nome = gerarNomePrato(i);                     // Nome no máximo 50 caracteres, sem espaço
     }
 
