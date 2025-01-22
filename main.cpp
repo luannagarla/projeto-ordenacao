@@ -3,7 +3,6 @@
 #include <random>
 #include <ctime>
 #include <string>
-#include <sstream>
 
 using namespace std;
 
@@ -20,7 +19,6 @@ void bubbleSort(vector<Prato> &pratos, int n)
     {
         for (int j = 0; j < n - i - 1; ++j)
         {
-            // maior prioridade ou, caso empate, menor tempo
             if (pratos[j].prioridade < pratos[j + 1].prioridade ||
                 (pratos[j].prioridade == pratos[j + 1].prioridade && pratos[j].tempo > pratos[j + 1].tempo))
             {
@@ -34,8 +32,8 @@ void bubbleSort(vector<Prato> &pratos, int n)
 
 int quickSort_particao(vector<Prato> &pratos, int low, int high)
 {
-    Prato pivot = pratos[high]; 
-    int i = low - 1; 
+    Prato pivot = pratos[high];
+    int i = low - 1;
 
     for (int j = low; j < high; ++j)
     {
@@ -53,7 +51,7 @@ int quickSort_particao(vector<Prato> &pratos, int low, int high)
     pratos[i + 1] = pratos[high];
     pratos[high] = aux;
 
-    return i + 1; 
+    return i + 1;
 }
 
 void quickSort_ordena(vector<Prato> &pratos, int low, int high)
@@ -61,7 +59,6 @@ void quickSort_ordena(vector<Prato> &pratos, int low, int high)
     if (low < high)
     {
         int pi = quickSort_particao(pratos, low, high);
-
         quickSort_ordena(pratos, low, pi - 1);
         quickSort_ordena(pratos, pi + 1, high);
     }
@@ -75,17 +72,17 @@ string gerarNomePrato(int indice)
         "cornish-pasty", "yorkshire-pudding", "sponge-cake", "chicken-tikka-masala", "bangers-and-mash"};
 
     return nomes[indice % nomes.size()];
-    // return nome + "-" + to_string(indice); //não tenho a biblioteca que faça isso, preciso achar
 }
 
 int gerarNumeroAleatorio(int min, int max)
 {
-    static mt19937 rng(time(0)); // random
+    static mt19937 rng(time(0));
     uniform_int_distribution<int> dist(min, max);
     return dist(rng);
 }
 
-void printData(vector<Prato> pratos, int n){
+void printData(const vector<Prato> &pratos, int n)
+{
     for (int i = 0; i < n; ++i)
     {
         cout << "Prato " << i + 1 << ": "
@@ -97,9 +94,11 @@ void printData(vector<Prato> pratos, int n){
 
 int main()
 {
-    int n = 10; // aumentar depois 300000
+    int n = 10; // mudar pra 300000
+
     vector<Prato> pratos(n);
 
+    // Gerar dados aleatórios
     for (int i = 0; i < n; ++i)
     {
         pratos[i].prioridade = gerarNumeroAleatorio(1, 300000); // Prioridade - 0 < k < 300k
@@ -107,13 +106,28 @@ int main()
         pratos[i].nome = gerarNomePrato(i);                     // Nome no máximo 50 caracteres, sem espaço
     }
 
-    bubbleSort(pratos, n);
-    cout << endl << "Pratos ordenados com BubbleSort:" << endl;
-    printData(pratos, n);
+    vector<Prato> pratosParaBubble = pratos;
+    vector<Prato> pratosParaQuick = pratos;
 
-    quickSort_ordena(pratos, 0, n - 1);
-    cout << endl < "Pratos ordenados com QuickSort:" << endl;
-    printData(pratos, n);
+    // Bubble Sort
+    clock_t start = clock();
+    bubbleSort(pratosParaBubble, n);
+    clock_t end = clock();
+    double bubbleTime = double(end - start) / CLOCKS_PER_SEC;
+    cout << "Tempo de execução do Bubble Sort: " << bubbleTime << " segundos" << endl;
+
+    cout << "\nPratos ordenados com Bubble Sort:" << endl;
+    printData(pratosParaBubble, n);
+
+    // Quick Sort
+    start = clock();
+    quickSort_ordena(pratosParaQuick, 0, n - 1);
+    end = clock();
+    double quickTime = double(end - start) / CLOCKS_PER_SEC;
+    cout << "Tempo de execução do Quick Sort: " << quickTime << " segundos" << endl;
+
+    cout << "\nPratos ordenados com Quick Sort:" << endl;
+    printData(pratosParaQuick, n);
 
     return 0;
 }
