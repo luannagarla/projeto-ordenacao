@@ -14,8 +14,13 @@ Joãozinho está planejando abrir um restaurante especializado em comida britân
 - [X]   Compare os métodos de ordenação e faça uma breve explicação sobre a escolha de pivôs no Quicksort.
 
 ---
-**:dart: Comparações dos códigos** 
+**:question: Comparações dos códigos** 
 
 
 ---
-**:dart: Escolha do pivô** 
+**:question: Escolha do pivô** 
+O pivô foi escolhido como o último elemento da lista devido aos seguintes motivos:
+
+* Eficiência em casos aleatórios: Como os dados são distribuídos de forma aleatória, selecionar o último elemento como pivô tende a produzir divisões razoavelmente equilibradas;
+* Simplicidade na implementação: A escolha do último elemento é simples e direta, pois ele pode ser acessado diretamente pelo índice high na main;
+* Baixo custo computacional: Essa abordagem não exige cálculos adicionais, como determinar o pivô mediano, o que torna a implementação mais eficiente e menos complexa.
