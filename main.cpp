@@ -97,7 +97,7 @@ void printData(const vector<Prato> &pratos, int n)
 
 int main()
 {
-    int n = 100000; // mudar pra 300000
+    int n = 300000; 
 
     vector<Prato> pratos(n);
 
@@ -113,26 +113,27 @@ int main()
     vector<Prato> pratosParaQuick = pratos;
 
     // Bubble Sort
-    clock_t start = clock();
+    clock_t startBubble = clock();  // Início da medição do Bubble Sort
     bubbleSort(pratosParaBubble, n);
-    clock_t end = clock();
+    clock_t endBubble = clock();    // Fim da medição do Bubble Sort
+    double bubbleTime = double(endBubble - startBubble) / CLOCKS_PER_SEC;
 
+    //não recomendo que este trecho seja descomentado se o "n" for muito grande
     // cout << "\nPratos ordenados com Bubble Sort:" << endl;
     // printData(pratosParaBubble, n);
 
     // Quick Sort
-    start = clock();
+    clock_t startQuick = clock();  // Início da medição do Quick Sort
     quickSort_ordena(pratosParaQuick, 0, n - 1);
-    end = clock();
+    clock_t endQuick = clock();    // Fim da medição do Quick Sort
+    double quickTime = double(endQuick - startQuick) / CLOCKS_PER_SEC;
 
+    //não recomendo que este trecho seja descomentado se o "n" for muito grande
     // cout << "\nPratos ordenados com Quick Sort:" << endl;
     // printData(pratosParaQuick, n);
 
-
     // Tempos
-    double bubbleTime = double(end - start) / CLOCKS_PER_SEC;
     cout << "Tempo de execução do Bubble Sort: " << bubbleTime << " segundos" << endl;
-    double quickTime = double(end - start) / CLOCKS_PER_SEC;
     cout << "Tempo de execução do Quick Sort: " << quickTime << " segundos" << endl;
 
     return 0;

@@ -15,6 +15,8 @@ Joãozinho está planejando abrir um restaurante especializado em comida britân
 
 ---
 **:question: Comparações dos códigos** 
+![alt text](image.png)
+
 
 
 ---
