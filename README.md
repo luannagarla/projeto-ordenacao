@@ -1,9 +1,5 @@
 # Atividade de ordenação - bubbleSort e quickSort
 
-Joãozinho está planejando abrir um restaurante especializado em comida britânica e pediu sua ajuda para priorizar os pratos do cardápio. Como seu prato favorito tem a palavra “Bubble” no nome, ele acredita que o algoritmo Bubble Sort seria o mais adequado para essa tarefa. No entanto, como você conhece algoritmos mais eficientes, pretende implementar outro para demonstrar uma solução mais otimizada.
-
----
-
 **:dart: Objetivos** 
 
 - [X]   Recepção de 0 < k < 3 ⋅ 10^5 pratos (300k);
@@ -17,7 +13,11 @@ Joãozinho está planejando abrir um restaurante especializado em comida britân
 **:question: Comparações dos códigos** 
 ![alt text](image.png)
 
+Os meus testes de comparação foram baseados no tempo de execução dos códigos, utilizando a biblioteca ctime para realizar a contagem. A partir dos resultados, é possível observar uma diferença significativa entre o desempenho das duas operações.
 
+Isso ocorre porque o Bubble Sort é um algoritmo ineficiente para grandes volumes de dados. Com complexidade quadrática, ele se torna inviável em entradas grandes, já que o número de iterações necessárias e as trocas de elementos aumentam exponencialmente, resultando em um tempo de execução extremamente longo.
+
+Já o Quick Sort, que utiliza a estratégia de dividir o problema em partes menores, é mais eficiente tanto em termos de tempo quanto de memória. Sua implementação recursiva e a estratégia de partição permitem que o algoritmo lide de maneira mais eficaz com conjuntos de dados grandes, superando o desempenho do Bubble Sort em termos de velocidade. No entanto, o Quick Sort se sai melhor em listas grandes, enquanto em listas pequenas ele pode não ter uma vantagem tão expressiva.
 
 ---
 **:question: Escolha do pivô** 
