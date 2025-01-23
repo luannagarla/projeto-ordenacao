@@ -3,17 +3,17 @@
 **:dart: Objetivos** 
 
 - [X]   Recepção de 0 < k < 3 ⋅ 10^5 pratos (300k);
-- [X]   Implementação do método de ordenação Quicksort;
-- [X]   Implementação do método de ordenação Quicksort;
+- [X]   O tempo de preparo (em minutos) é um inteiro 0 < t < 10^3 (1k);
 - [X]   Nenhum prato tem a mesma prioridade e tempo de preparo;
-- [X]  A prioridade é um inteiro 0 < p < 3 ⋅ 10^5, o tempo de preparo (em minutos) é um inteiro 0 < t < 10^3 (1k);
-- [X]   Compare os métodos de ordenação e faça uma breve explicação sobre a escolha de pivôs no Quicksort.
+- [X]   Implementação do método de ordenação BubbleSort;
+- [X]   Implementação do método de ordenação QuickSort;
+- [X]   Comparação entre os métodos de ordenação e breve explicação sobre a escolha de pivôs no Quicksort.
 
 ---
 **:question: Comparações dos códigos** 
 ![alt text](image.png)
 
-Os meus testes de comparação foram baseados no tempo de execução dos códigos, utilizando a biblioteca ctime para realizar a contagem. A partir dos resultados, é possível observar uma diferença significativa entre o desempenho das duas operações.
+Os meus testes de comparação foram baseados no tempo de execução dos códigos com n = 100k, utilizando a biblioteca ctime para realizar a contagem. A partir dos resultados, é possível observar uma diferença significativa entre o desempenho das duas operações.
 
 Isso ocorre porque o Bubble Sort é um algoritmo ineficiente para grandes volumes de dados. Com complexidade quadrática, ele se torna inviável em entradas grandes, já que o número de iterações necessárias e as trocas de elementos aumentam exponencialmente, resultando em um tempo de execução extremamente longo.
 
