@@ -101,7 +101,6 @@ int main()
 
     vector<Prato> pratos(n);
 
-    // Gerar dados aleatórios
     for (int i = 0; i < n; ++i)
     {
         pratos[i].prioridade = gerarNumeroAleatorio(1, 300000); // Prioridade - 0 < k < 300k
@@ -113,24 +112,24 @@ int main()
     vector<Prato> pratosParaQuick = pratos;
 
     // Bubble Sort
-    clock_t startBubble = clock();  // Início da medição do Bubble Sort
+    clock_t startBubble = clock();  
     bubbleSort(pratosParaBubble, n);
-    clock_t endBubble = clock();    // Fim da medição do Bubble Sort
+    clock_t endBubble = clock();    
     double bubbleTime = double(endBubble - startBubble) / CLOCKS_PER_SEC;
 
     //não recomendo que este trecho seja descomentado se o "n" for muito grande
-    // cout << "\nPratos ordenados com Bubble Sort:" << endl;
-    // printData(pratosParaBubble, n);
+    cout << "\nPratos ordenados com Bubble Sort:" << endl;
+    printData(pratosParaBubble, n);
 
     // Quick Sort
-    clock_t startQuick = clock();  // Início da medição do Quick Sort
+    clock_t startQuick = clock(); 
     quickSort_ordena(pratosParaQuick, 0, n - 1);
-    clock_t endQuick = clock();    // Fim da medição do Quick Sort
+    clock_t endQuick = clock();  
     double quickTime = double(endQuick - startQuick) / CLOCKS_PER_SEC;
 
     //não recomendo que este trecho seja descomentado se o "n" for muito grande
-    // cout << "\nPratos ordenados com Quick Sort:" << endl;
-    // printData(pratosParaQuick, n);
+    cout << "\nPratos ordenados com Quick Sort:" << endl;
+    printData(pratosParaQuick, n);
 
     // Tempos
     cout << "Tempo de execução do Bubble Sort: " << bubbleTime << " segundos" << endl;
