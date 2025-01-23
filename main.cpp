@@ -16,19 +16,23 @@ struct Prato
     string nome;
 };
 
-void bubbleSort(vector<Prato> &pratos, int n)
-{
-    for (int i = 0; i < n - 1; ++i)
-    {
-        for (int j = 0; j < n - i - 1; ++j)
-        {
+void bubbleSort(vector<Prato> &pratos, int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        bool trocou = false;
+
+        for (int j = 0; j < n - i - 1; ++j) {
             if (pratos[j].prioridade < pratos[j + 1].prioridade ||
-                (pratos[j].prioridade == pratos[j + 1].prioridade && pratos[j].tempo > pratos[j + 1].tempo))
-            {
+                (pratos[j].prioridade == pratos[j + 1].prioridade && pratos[j].tempo > pratos[j + 1].tempo)) {
+
                 Prato aux = pratos[j];
                 pratos[j] = pratos[j + 1];
                 pratos[j + 1] = aux;
+
+                trocou = true; 
             }
+        }
+        if (!trocou) {
+            break; 
         }
     }
 }
@@ -97,7 +101,7 @@ void printData(const vector<Prato> &pratos, int n)
 
 int main()
 {
-    int n = 300000; 
+    int n = 100000; 
 
     vector<Prato> pratos(n);
 
@@ -118,8 +122,8 @@ int main()
     double bubbleTime = double(endBubble - startBubble) / CLOCKS_PER_SEC;
 
     //não recomendo que este trecho seja descomentado se o "n" for muito grande
-    cout << "\nPratos ordenados com Bubble Sort:" << endl;
-    printData(pratosParaBubble, n);
+    // cout << "\nPratos ordenados com Bubble Sort:" << endl;
+    // printData(pratosParaBubble, n);
 
     // Quick Sort
     clock_t startQuick = clock(); 
@@ -128,8 +132,8 @@ int main()
     double quickTime = double(endQuick - startQuick) / CLOCKS_PER_SEC;
 
     //não recomendo que este trecho seja descomentado se o "n" for muito grande
-    cout << "\nPratos ordenados com Quick Sort:" << endl;
-    printData(pratosParaQuick, n);
+    // cout << "\nPratos ordenados com Quick Sort:" << endl;
+    // printData(pratosParaQuick, n);
 
     // Tempos
     cout << "Tempo de execução do Bubble Sort: " << bubbleTime << " segundos" << endl;
