@@ -63,6 +63,8 @@
     "ratio": "cpp",
     "semaphore": "cpp",
     "chrono": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "iosfwd": "cpp",
+    "vector": "cpp"
   }
 }

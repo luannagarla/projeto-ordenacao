@@ -7,6 +7,9 @@
 #include <sstream>
 #include <time.h>
 
+#include <algorithm> // Para std::shuffle
+#include <random>    // Para random_device e mt19937
+
 using namespace std;
 
 struct Prato
@@ -91,7 +94,7 @@ string gerarNomePrato(int indice)
     return nome + "_v" + oss.str();
 }
 
-int gerarNumeroAleatorio(int min, int max)
+int gerarNumero(int min, int max)
 {
     static mt19937 rng(time(0));
     uniform_int_distribution<int> dist(min, max);
@@ -115,10 +118,20 @@ vector<Prato> gerarPratos(int n)
 
     for (int i = 0; i < n; ++i)
     {
-        pratos[i].prioridade = gerarNumeroAleatorio(1, 300000); // Prioridade - 0 < k < 300k
-        pratos[i].tempo = gerarNumeroAleatorio(1, 1000);        // Tempo - 0 < t < 1k
-        pratos[i].nome = gerarNomePrato(i);                     // Nome no máximo 50 caracteres, sem espaço
+        pratos[i].prioridade = i;               // Prioridade - 0 < k < 300k
+        pratos[i].tempo = gerarNumero(1, 1000); // Tempo - 0 < t < 1k
+        pratos[i].nome = gerarNomePrato(i);     // Nome no máximo 50 caracteres, sem espaço
     }
+
+    /*Atribui "i" para prioridade para atender ao requisito "Nenhum prato tem a mesma prioridade e tempo de preparo.", porém,
+    dessa maneira, a lista já fica numa certa ordem*/
+
+    // Então fui atrás de um algoritmo para embaralhar a lista, para conseguir testar melhor a ordenação
+    random_device rd;
+    mt19937 g(rd());
+    shuffle(pratos.begin(), pratos.end(), g);
+
+    // printData(pratos, n);
 
     return pratos;
 }
