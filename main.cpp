@@ -16,23 +16,28 @@ struct Prato
     string nome;
 };
 
-void bubbleSort(vector<Prato> &pratos, int n) {
-    for (int i = 0; i < n - 1; ++i) {
+void bubbleSort(vector<Prato> &pratos, int n)
+{
+    for (int i = 0; i < n - 1; ++i)
+    {
         bool trocou = false;
 
-        for (int j = 0; j < n - i - 1; ++j) {
+        for (int j = 0; j < n - i - 1; ++j)
+        {
             if (pratos[j].prioridade < pratos[j + 1].prioridade ||
-                (pratos[j].prioridade == pratos[j + 1].prioridade && pratos[j].tempo > pratos[j + 1].tempo)) {
+                (pratos[j].prioridade == pratos[j + 1].prioridade && pratos[j].tempo > pratos[j + 1].tempo))
+            {
 
                 Prato aux = pratos[j];
                 pratos[j] = pratos[j + 1];
                 pratos[j + 1] = aux;
 
-                trocou = true; 
+                trocou = true;
             }
         }
-        if (!trocou) {
-            break; 
+        if (!trocou)
+        {
+            break;
         }
     }
 }
@@ -78,7 +83,12 @@ string gerarNomePrato(int indice)
         "shepherds-pie", "ploughman", "toad-in-the-hole", "black-pudding", "wellington-beef", "scotch-egg",
         "cornish-pasty", "yorkshire-pudding", "sponge-cake", "chicken-tikka-masala", "bangers-and-mash"};
 
-    return nomes[indice % nomes.size()];
+    string nome = nomes[indice % nomes.size()];
+
+    ostringstream oss;
+    oss << indice;
+
+    return nome + "_v" + oss.str();
 }
 
 int gerarNumeroAleatorio(int min, int max)
@@ -99,10 +109,8 @@ void printData(const vector<Prato> &pratos, int n)
     }
 }
 
-int main()
+vector<Prato> gerarPratos(int n)
 {
-    int n = 100000; 
-
     vector<Prato> pratos(n);
 
     for (int i = 0; i < n; ++i)
@@ -112,26 +120,35 @@ int main()
         pratos[i].nome = gerarNomePrato(i);                     // Nome no máximo 50 caracteres, sem espaço
     }
 
+    return pratos;
+}
+
+int main()
+{
+    int n = 300000;
+
+    vector<Prato> pratos = gerarPratos(n);
+
     vector<Prato> pratosParaBubble = pratos;
     vector<Prato> pratosParaQuick = pratos;
 
     // Bubble Sort
-    clock_t startBubble = clock();  
+    clock_t startBubble = clock();
     bubbleSort(pratosParaBubble, n);
-    clock_t endBubble = clock();    
+    clock_t endBubble = clock();
     double bubbleTime = double(endBubble - startBubble) / CLOCKS_PER_SEC;
 
-    //não recomendo que este trecho seja descomentado se o "n" for muito grande
+    // não recomendo que este trecho seja descomentado se o "n" for muito grande
     // cout << "\nPratos ordenados com Bubble Sort:" << endl;
     // printData(pratosParaBubble, n);
 
     // Quick Sort
-    clock_t startQuick = clock(); 
+    clock_t startQuick = clock();
     quickSort_ordena(pratosParaQuick, 0, n - 1);
-    clock_t endQuick = clock();  
+    clock_t endQuick = clock();
     double quickTime = double(endQuick - startQuick) / CLOCKS_PER_SEC;
 
-    //não recomendo que este trecho seja descomentado se o "n" for muito grande
+    // não recomendo que este trecho seja descomentado se o "n" for muito grande
     // cout << "\nPratos ordenados com Quick Sort:" << endl;
     // printData(pratosParaQuick, n);
 
