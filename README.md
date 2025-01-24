@@ -13,7 +13,7 @@
 **:question: Comparações dos códigos** 
 ![alt text](image.png)
 
-Os meus testes de comparação foram baseados no tempo de execução dos códigos com n = 100k, utilizando a biblioteca ctime para realizar a contagem. A partir dos resultados, é possível observar uma diferença significativa entre o desempenho das duas operações.
+Os meus testes de comparação foram baseados no tempo de execução dos códigos, utilizando a biblioteca ctime para realizar a contagem. A partir dos resultados, é possível observar uma diferença significativa entre o desempenho das duas operações.
 
 Isso ocorre porque o Bubble Sort é um algoritmo ineficiente para grandes volumes de dados. Com complexidade quadrática, ele se torna inviável em entradas grandes, já que o número de iterações necessárias e as trocas de elementos aumentam exponencialmente, resultando em um tempo de execução extremamente longo.
 
