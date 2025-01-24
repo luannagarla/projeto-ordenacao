@@ -7,8 +7,8 @@
 #include <sstream>
 #include <time.h>
 
-#include <algorithm> // Para std::shuffle
-#include <random>    // Para random_device e mt19937
+#include <algorithm> 
+#include <random>   
 
 using namespace std;
 
@@ -132,7 +132,6 @@ vector<Prato> gerarPratos(int n)
     shuffle(pratos.begin(), pratos.end(), g);
 
     // printData(pratos, n);
-
     return pratos;
 }
 
@@ -145,7 +144,6 @@ int main()
     vector<Prato> pratosParaBubble = pratos;
     vector<Prato> pratosParaQuick = pratos;
 
-    // Bubble Sort
     clock_t startBubble = clock();
     bubbleSort(pratosParaBubble, n);
     clock_t endBubble = clock();
@@ -155,7 +153,6 @@ int main()
     // cout << "\nPratos ordenados com Bubble Sort:" << endl;
     // printData(pratosParaBubble, n);
 
-    // Quick Sort
     clock_t startQuick = clock();
     quickSort_ordena(pratosParaQuick, 0, n - 1);
     clock_t endQuick = clock();
@@ -165,7 +162,6 @@ int main()
     // cout << "\nPratos ordenados com Quick Sort:" << endl;
     // printData(pratosParaQuick, n);
 
-    // Tempos
     cout << "Tempo de execução do Bubble Sort: " << bubbleTime << " segundos" << endl;
     cout << "Tempo de execução do Quick Sort: " << quickTime << " segundos" << endl;
 
